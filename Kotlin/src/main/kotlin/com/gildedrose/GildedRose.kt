@@ -1,8 +1,14 @@
 package com.gildedrose
 
+import com.gildedrose.pricing.updateQuality
+
 class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
+        items = items.map { it.updateQuality() }.toTypedArray()
+    }
+
+    fun old() {
         for (i in items.indices) {
             if (items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
                 if (items[i].quality > 0) {
@@ -53,6 +59,5 @@ class GildedRose(var items: Array<Item>) {
             }
         }
     }
-
 }
 

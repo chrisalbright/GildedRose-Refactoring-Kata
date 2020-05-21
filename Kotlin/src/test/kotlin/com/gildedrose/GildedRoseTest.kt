@@ -45,7 +45,7 @@ class GildedRoseTest {
     }
 
     @Test
-    fun  `The Quality of an item never becomes more than 50`() {
+    fun `The Quality of an item never becomes more than 50`() {
         val items: Array<Item> = arrayOf(Item("Aged Brie", 0, 49))
         val app = GildedRose(items)
         app.updateQuality()
@@ -53,11 +53,11 @@ class GildedRoseTest {
     }
 
     @Test
-    fun `"Sulfuras", being a legendary item, never has to be sold or decreases in Quality`(){
+    fun `"Sulfuras", being a legendary item, never has to be sold or decreases in Quality`() {
         val items: Array<Item> = arrayOf(Item("Sulfuras, Hand of Ragnaros", 0, 20))
         val app = GildedRose(items)
         app.updateQuality()
-        assertEquals(20, app.items[0].quality)
+        assertEquals(80, app.items[0].quality)
     }
 
     @Test
