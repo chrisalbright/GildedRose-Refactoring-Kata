@@ -1,11 +1,13 @@
 package com.gildedrose
 
-import com.gildedrose.pricing.updateQuality
+import com.gildedrose.pricing.GildedRosePricing
+import com.gildedrose.pricing.Pricing
 
-class GildedRose(var items: Array<Item>) {
+
+class GildedRose(var items: Array<Item>, private val pricing: Pricing<Item> = GildedRosePricing) {
 
     fun updateQuality() {
-        items = items.map { it.updateQuality() }.toTypedArray()
+        items = items.map { pricing.update(it) }.toTypedArray()
     }
 
     fun old() {

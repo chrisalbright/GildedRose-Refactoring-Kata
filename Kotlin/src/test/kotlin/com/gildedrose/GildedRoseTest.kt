@@ -1,10 +1,25 @@
 package com.gildedrose
 
-import org.junit.Assert.*
-import org.junit.Ignore
+import com.gildedrose.pricing.Pricing
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class GildedRoseTest {
+
+    @Test
+    fun `Gilded Rose Adjusts Pricing`() {
+        val items: Array<Item> = arrayOf(Item("foo", 1, 1))
+        val pricedItems = mutableListOf<Item>()
+        val testPricing = object : Pricing<Item> {
+            override fun update(item: Item): Item {
+                pricedItems += item
+                return item
+            }
+        }
+        val app = GildedRose(items, testPricing)
+        app.updateQuality()
+        assertEquals(items.toMutableList(), pricedItems)
+    }
 
     @Test
     fun `At the end of each day our system lowers both SellIn and Quality for every item`() {
