@@ -89,12 +89,13 @@ class ItemTest {
         assertEquals(0, newItem.quality)
     }
 
-    @Ignore
     @Test
     fun `"Conjured" items degrade in Quality twice as fast as normal items`() {
-        val item = Item("Conjured Gem", 10, 10)
+        val item = Item("Conjured Gem", 1, 10)
         val newItem = item.updateQuality()
         assertEquals(8, newItem.quality)
+        val newItem2 = newItem.updateQuality()
+        assertEquals(4, newItem2.quality)
     }
 }
 

@@ -92,13 +92,14 @@ class GildedRoseTest {
         assertEquals(0, app.items[0].quality)
     }
 
-    @Ignore
     @Test
     fun `"Conjured" items degrade in Quality twice as fast as normal items`() {
-        val items: Array<Item> = arrayOf(Item("Conjured Gem", 10, 10))
+        val items: Array<Item> = arrayOf(Item("Conjured Gem", 1, 10))
         val app = GildedRose(items)
         app.updateQuality()
         assertEquals(8, app.items[0].quality)
+        app.updateQuality()
+        assertEquals(4, app.items[0].quality)
     }
 }
 

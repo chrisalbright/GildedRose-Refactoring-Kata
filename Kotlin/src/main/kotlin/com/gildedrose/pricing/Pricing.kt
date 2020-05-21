@@ -23,6 +23,15 @@ private class DefaultPricingStrategy : PricingStrategy {
             }
 }
 
+private class ConjuredPricingStrategy : PricingStrategy {
+    override fun updateItem(item: Item): Item =
+            if (item.sellIn <= 0) {
+                Item(item.name, sellIn = item.sellIn - 1, quality = limitMinQuality(item.quality - 4))
+            } else {
+                Item(item.name, sellIn = item.sellIn - 1, quality = limitMinQuality(item.quality - 2))
+            }
+}
+
 private class BackstagePassPricingStrategy : PricingStrategy {
     override fun updateItem(item: Item): Item {
         return if (item.sellIn <= 0){
@@ -53,6 +62,8 @@ fun pricingStrategyFor(item: Item): PricingStrategy {
         SulfurasPricingStrategy()
     } else if (item.name.contains("Aged Brie")) {
         AgedBriePricingStrategy()
+    } else if (item.name.contains("Conjured")) {
+        ConjuredPricingStrategy()
     } else {
         DefaultPricingStrategy()
     }
